@@ -11,8 +11,8 @@ RUN apt update && \
     apt install -y libpq-dev
 
 COPY ./ /tmp/build
-COPY src/python3_project_template/db/migrations ./migrations/
-COPY src/python3_project_template/db/alembic.ini ./alembic.ini
+COPY src/interview/db/migrations ./migrations/
+COPY src/interview/db/alembic.ini ./alembic.ini
 
 RUN  (cd /tmp/build \
      && python3 -m venv py3env-dev \
@@ -28,7 +28,7 @@ RUN  export APP_HOME=/usr/local/bin/deployment \
          && python3 -m pip install -U pip \
          && python3 -m pip install -U setuptools \
          && python3 -m pip install -U wheel \
-         && python3 -m pip install -U python3_project_template --find-links=/tmp/build/dist)
+         && python3 -m pip install -U interview --find-links=/tmp/build/dist)
 
 
 FROM python:3.12-slim-bookworm
@@ -57,5 +57,5 @@ USER  appuser
 EXPOSE 8080
 
 
-CMD ["/usr/local/bin/deployment/py3env/bin/python3", "-m", "uvicorn", "python3_project_template.api.http:app", \
+CMD ["/usr/local/bin/deployment/py3env/bin/python3", "-m", "uvicorn", "interview.api.http:app", \
      "--host", "0.0.0.0", "--port", "8080"]

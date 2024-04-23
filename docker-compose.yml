@@ -1,8 +1,7 @@
-version: '3.8'
 
 services:
   db:
-    image: postgres:15-alpine
+    image: postgres:16-alpine
     container_name: db
     ports:
       - "5432:5432"
@@ -25,12 +24,12 @@ services:
     depends_on:
       - db
 
-  python3-template-service:
+  interview-service:
     build:
       context: ./
       dockerfile: Dockerfile
-    image: python3-template-service
-    container_name: python3-template-service
+    image: interview-service
+    container_name: interview-service
     ports:
       - "8080:8080"
     environment:

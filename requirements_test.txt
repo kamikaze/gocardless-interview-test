@@ -1,0 +1,7 @@
+playwright
+pytest
+pytest-asyncio
+pytest-cov
+pytest-html
+pytest-playwright
+pytest-xdist
